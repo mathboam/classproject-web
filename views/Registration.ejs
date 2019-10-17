@@ -1,0 +1,55 @@
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Register
+        </h1>
+        <% include ./partials/messages %>
+        <form action="/users/register" method="POST">
+          <div class="form-group">
+            <label for="Hall Name">Hall</label>
+            <select class="form-control" name="Hall" id="Hall">
+                <option value="">Select your hall</option>
+                <option value="nelson">Nelson</option>
+                <option value="common-wealth">Conmmon wealth</option>
+                <option value="tF">TF</option>
+                <option value="akuafo">Akuafo</option>
+                <option value="bani">Bani</option>
+                <option value="evandy">Evandy</option>
+                <option value="legon">Legon</option>
+                <option value="jubilee">Jubilee</option>
+                <option value="kwapong">Kwapong</option>
+                <option value="liman">Liman</option>
+                <option value="sey">Sey</option>
+                <option value="sarbah">Sarbah</option>
+                <option value="volta">Sarbah</option>
+                <option value="pent">Pent</option>
+            </select>
+            <div class="form-group">
+                <label for="room">Room number</label>
+                <select class="form-control" name="Hall" id="Hall">
+                    <option value="">Select your hall</option>
+                    <option value="nelson">Nelson</option>
+                    <option value="common-wealth">Conmmon wealth</option>
+                    <option value="tF">TF</option>
+                    <option value="akuafo">Akuafo</option>
+                    <option value="bani">Bani</option>
+                    <option value="evandy">Evandy</option>
+                    <option value="legon">Legon</option>
+                    <option value="jubilee">Jubilee</option>
+                    <option value="kwapong">Kwapong</option>
+                    <option value="liman">Liman</option>
+                    <option value="sey">Sey</option>
+                    <option value="sarbah">Sarbah</option>
+                    <option value="volta">Sarbah</option>
+                    <option value="pent">Pent</option>
+                </select>
+            </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Register
+          </button>
+        </form>
+        <p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
+      </div>
+    </div>
+  </div>
