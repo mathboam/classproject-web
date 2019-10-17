@@ -17,6 +17,14 @@ const StudentSchema = new Schema({
     password:{
         type:String,
         required:true
+    },
+    hall:{
+        type:String,
+        default:'null',
+    },
+    room:{
+        type:String,
+        default:'null'
     }
 });
 

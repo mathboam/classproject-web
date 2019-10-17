@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const bcrypt = require('bcryptjs');
 const Student = mongoose.model('Student');
@@ -10,12 +11,12 @@ exports.homepageController  = (req,res) =>{
 
 // register controller
 exports.registerController = (req,res,next) => {
-    res.render('register',{title:'Register',errors: []});
+    res.render('register',{title:'Register',errors: [],error:''});
 }
 
 // login controller
 exports.loginController = (req,res) => {
-    res.render('login',{title:'Login',errors: []});
+    res.render('login',{title:'Login',errors: [],error:''});
 }
 
 exports.registermiddleware = (req,res) => {
@@ -97,5 +98,27 @@ exports.passportAuthentication = (req,res,next) => {
 }
 
 exports.dashboardcontroller = (req,res,next)=>{
-    res.render('Registration',{title:"Hall | Registration",errors:[]});
+    res.render('Registration',{title:"Hall | Registration",errors:[],counter:0});
+}
+
+exports.logoutHandle = (req,res) => {
+    req.logout();
+    req.flash('success_msg','you are logged out');
+    res.redirect('/users/login');
+}
+
+exports.registration = (req,res,next) => {
+    const  { hall, room} = req.body;
+    var id = req.body.id;
+    Student.updateOne({_id:id})
+    .then(student => {
+        student.hall = hall;
+        student.room = room;
+    })
+    .catch(err => {
+        if(err){
+        console.log(err);  
+             }
+        } 
+    );
 }

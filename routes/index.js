@@ -9,7 +9,8 @@ router.post('/users/register',userController.registermiddleware);
 router.get('/users/login',userController.loginController);
 router.post('/users/login',userController.passportAuthentication);
 router.get('/users/dashboard',userController.dashboardcontroller);
-
+router.get('/users/logout',userController.logoutHandle);
+router.post('users/registration',userController.registration);
 
 
 

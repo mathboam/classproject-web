@@ -10,6 +10,8 @@ const ejsLocals = require('ejs-locals');
 
 const app = express();
 
+
+
 require('./config/passport')(passport);
 // takes requests and make them usable in the req.body
 app.use(bodyParser.json());
@@ -28,13 +30,15 @@ app.use(passport.session());
 
 app.use(flash());
 
-// global variables
-app.use((req,res,nexyt)=>{
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('erro_msg');
-    nexyt();
-})
 
+
+// global variables
+app.use((req,res,next)=>{
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 
 require('./models/Student');
