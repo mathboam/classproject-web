@@ -20,11 +20,11 @@ const StudentSchema = new Schema({
     },
     hall:{
         type:String,
-        default:'null',
+        required:true
     },
     room:{
         type:String,
-        default:'null'
+        required:true
     }
 });
 

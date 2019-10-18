@@ -10,8 +10,8 @@ router.get('/users/login',userController.loginController);
 router.post('/users/login',userController.passportAuthentication);
 router.get('/users/dashboard',userController.dashboardcontroller);
 router.get('/users/logout',userController.logoutHandle);
-router.post('users/registration',userController.registration);
-
+router.get('/users/registration',userController.registration,userController.dashboardcontroller);
+router.post('/users/regstration',userController.registration);
 
 
 module.exports = router;

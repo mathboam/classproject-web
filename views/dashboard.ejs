@@ -3,31 +3,22 @@
 <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">Student ID</th>
+        <th scope="col">Hall</th>
+        <th scope="col">Room Number</th>
       </tr>
     </thead>
     <tbody>
+      <% students.forEach(function(student){ %>
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td><%= student.name %></td>
+        <td><%= student.studentID %></td>
+        <td><%= student.hall %></td>
+        <td><%= student.room %></td>
+        <% })%>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
+    
     </tbody>
   </table>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<a href="/users/logout" class="btn btn-primary">Logout</a>

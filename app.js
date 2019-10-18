@@ -7,12 +7,9 @@ const session = require('express-session');
 const passport = require('passport');
 const flash  = require('connect-flash');
 const ejsLocals = require('ejs-locals');
-
 const app = express();
-
-
-
 require('./config/passport')(passport);
+
 // takes requests and make them usable in the req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
@@ -37,6 +34,7 @@ app.use((req,res,next)=>{
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+    res.counter = 0;
     next();
 });
 

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const bcrypt = require('bcryptjs');
 const Student = mongoose.model('Student');
@@ -11,16 +10,16 @@ exports.homepageController  = (req,res) =>{
 
 // register controller
 exports.registerController = (req,res,next) => {
-    res.render('register',{title:'Register',errors: [],error:''});
+    res.render('register',{title:'Register',errors: [],error:'',counter:0});
 }
 
 // login controller
 exports.loginController = (req,res) => {
-    res.render('login',{title:'Login',errors: [],error:''});
+    res.render('login',{title:'Login',errors: [],error:'',counter:0});
 }
 
 exports.registermiddleware = (req,res) => {
-    const { name , email , password , studentID , password2} = req.body;
+    const { name , email , password , studentID , password2, hall ,room} = req.body;
     let errors = [];
 
     // check required fields
@@ -36,7 +35,7 @@ exports.registermiddleware = (req,res) => {
         errors.push({msg:"Password should be more than six character"});
     }
     if(errors.length >0){
-        res.render('register',{title:"Register",errors,name,email,studentID});
+        res.render('register',{title:"Register",errors,name,email,studentID,conter:0});
     }else{
         // check if the acoount is not registered already
         Student.findOne({studentID:studentID}).then(student =>{
@@ -55,7 +54,9 @@ exports.registermiddleware = (req,res) => {
                     name,
                     email,
                     studentID,
-                    password
+                    password,
+                    hall,
+                    room
                 })
                 // console.log(newStudent);
                 // res.send('hello');
@@ -77,7 +78,6 @@ exports.registermiddleware = (req,res) => {
                             }).catch(err => {
                                 if (err){
                                     console.log(err);
-                                    
                                 }
                             });
                         }
@@ -98,7 +98,13 @@ exports.passportAuthentication = (req,res,next) => {
 }
 
 exports.dashboardcontroller = (req,res,next)=>{
-    res.render('Registration',{title:"Hall | Registration",errors:[],counter:0});
+    Student.find({},function(err,doc){
+        if (err) {
+            console.log(err);
+        }else{
+        res.render('dashboard',{title:"Dashboard",students:doc});
+        }
+    })
 }
 
 exports.logoutHandle = (req,res) => {
@@ -108,17 +114,23 @@ exports.logoutHandle = (req,res) => {
 }
 
 exports.registration = (req,res,next) => {
+    res.render('Registration',{title:'Registration',errors:[],counter:0});
     const  { hall, room} = req.body;
-    var id = req.body.id;
-    Student.updateOne({_id:id})
-    .then(student => {
-        student.hall = hall;
-        student.room = room;
-    })
-    .catch(err => {
-        if(err){
-        console.log(err);  
-             }
-        } 
-    );
+    var id = Student.findById({_id:this.id});
+    Student.findByIdAndUpdate(id,
+        {
+            $set:{hall: hall,room:room}
+        },
+        {
+            new: true
+        }, (err,udpated)=>{
+            if(err){
+                console.log(err);
+            }else if (udpated) {
+            req.flash('success_msg','hall registered');
+            next();
+            }
+                
+        })
 }
+
